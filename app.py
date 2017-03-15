@@ -9,7 +9,9 @@ class BotHandler:
 
     def get_updates(self, offset=None, timeout=30):
         method = 'getUpdates'
-        params = {'timeout': timeout, 'offset': offset}
+        self.timeout = timeout
+        self.offset = offset
+        params = {'timeout': self.timeout, 'offset': self.offset}
         resp = requests.get(self.api_url + method, params)
         result_json = resp.json()['result']
         return result_json
@@ -30,8 +32,7 @@ class BotHandler:
 
         return last_update
 
-token = "306413636:AAGZittTDC9og0ExX0Q7wgIBNhw7RE-4nCY"
-greet_bot = BotHandler(token)
+greet_bot = BotHandler("306413636:AAGZittTDC9og0ExX0Q7wgIBNhw7RE-4nCY")
 greetings = ('hello', 'hi', 'greetings', 'sup')
 now = datetime.datetime.now()
 
